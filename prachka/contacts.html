@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        nav {
+            margin-left: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .contact-info {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-info h2 {
+            margin: 0 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/static/logo.png" alt="Логотип" class="logo">
+        <h1>Контакты</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/services">Услуги</a></li>
+                <li><a href="/schedule">График работы</a></li>
+                <li><a href="/registration" id="replace">Регистрация</a></li>
+                <li><a id="replac" href="/entry">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="contact-info">
+            <h2>Свяжитесь с нами</h2>
+            <p>У нас вы можете отдать свою одежду в стирку и получить её в идеальном состоянии! Для получения дополнительной информации свяжитесь с нами по следующим контактам:</p>
+            <ul>
+                <li><strong>Телефон:</strong> +7 (123) 456-78-90</li>
+                <li><strong>Email:</strong> info@laundry.com</li>
+                <li><strong>Адрес:</strong> г. Москва, ул. Прачечная, д. 10</li>
+            </ul>
+            <p>Мы рады помочь вам и ответить на все ваши вопросы!</p>
+        </div>
+    </main>
+    <script>
+        async function success() {
+    const response = await fetch("/checkAuth", {
+                method: "GET",
+                credentials : "include",
+            });
+            if (response.ok) {
+              
+                const data = await response.json();
+                console.log("Пытаюсь поменять регистрацию на ", data)
+                document.getElementById("replace").innerText = data.token;
+            } else {
+              alert("фигня какая-то")
+            }
+          }
+  document.addEventListener('DOMContentLoaded', success());
+    </script>
+</body>
+</html>

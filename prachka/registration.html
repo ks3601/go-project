@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="static/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        nav {
+            margin-left: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="static/logo.png" alt="Логотип" class="logo">
+    <h1>Регистрация</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="schedule.html">Расписание</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+            <li><a href="registration.html">Регистрация</a></li>
+            <li><a id="replac" href="entry.html">Вход</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h2>Заполните форму регистрации</h2>
+    <form id="signUp">
+        <label for="fullName">ФИО:</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+        <label for="email">Электронная почта:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Пароль:</label>
+        <input type="tel" id="phone" name="phone" required>
+        
+        <label for="date">Дата регистрации:</label>
+        <input type="date" id="date" name="date" required>
+
+        <input type="submit" onclick=registr() value="Зарегистрироваться">
+    </form>
+
+    <h3>Почему стоит зарегистрироваться?</h3>
+    <p>Регистрация позволит вам:</p>
+    <ul>
+        <li>Получить доступ к эксклюзивным материалам</li>
+        <li>Получить уведомления об обновлениях мероприятия</li>
+        <li>Участвовать в розыгрышах и акциях</li>
+    </ul>
+</main>
+
+<footer>
+    <p>&copy; 2024 FRESHNESS.</p>
+</footer>
+<script>
+    async function registr() {
+        const username = document.getElementById("email").value;
+    const password = document.getElementById("phone").value;
+    alert("работаю");
+    const response = await fetch("/signUp", {
+        
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                console.log("всё сработало")
+                const data = await response.json();
+                window.location.href = '/index.html';
+            } else {
+                alert('что-то не так')
+            }
+    }
+    
+</script>
+</body>
+</html>
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>График работы</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        nav {
+            margin-left: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .schedule {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center; /* Центрируем текст */
+        }
+
+        .schedule h2 {
+            margin: 0 0 10px 0;
+        }
+
+        .schedule ul {
+            list-style-type: none; /* Убираем маркеры списка */
+            padding: 0; /* Убираем отступы */
+            font-size: 42px; /* Увеличиваем размер шрифта */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/static/logo.png" alt="Логотип" class="logo">
+        <h1>График работы</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/services">Услуги</a></li>
+                <li><a href="/contacts">Контакты</a></li>
+                <li><a href="/registration" id="replace">Регистрация</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="schedule">
+            <h2>Расписание работы на неделю:</h2>
+            <ul>
+                <li>Пн: 9:00 - 20:00</li>
+                <li>Вт: 9:00 - 20:00</li>
+                <li>Ср: 9:00 - 20:00</li>
+                <li>Чт: 9:00 - 20:00</li>
+                <li>Пт: 9:00 - 20:00</li>
+                <li>Сб: 10:00 - 18:00</li>
+                <li>Вс: выходной</li>
+            </ul>
+        </div>
+    </main>
+    <script>
+        async function success() {
+    const response = await fetch("/checkAuth", {
+                method: "GET",
+                credentials : "include",
+            });
+            if (response.ok) {
+              
+                const data = await response.json();
+                console.log("Пытаюсь поменять регистрацию на ", data)
+                document.getElementById("replace").innerText = data.token;
+            } else {
+              alert("фигня какая-то")
+            }
+          }
+  document.addEventListener('DOMContentLoaded', success());
+    </script>
+</body>
+</html>

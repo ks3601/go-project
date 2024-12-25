@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Прачечная</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #c4c5e9, #444165); /* Градиентный фон */
+      text-align: center; /* Выравнивание текста по центру */
+    }
+
+    header {
+      background: #333;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .logo {
+      width: 100px; /* измените размер логотипа, если нужно */
+      height: auto;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      padding: 8px 12px;
+      transition: background 0.3s;
+    }
+
+    nav ul li a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 5px;
+    }
+
+    .content {
+      padding: 20px;
+      max-width: 800px;
+      margin: 20px auto;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #333;
+      color: white;
+      position: relative; /* Изменено на relative */
+      width: 100%;
+    }
+
+    .content img {
+        max-width: 100%; /* Уменьшаем максимальную ширину изображения до 100% */
+        height: auto; /* Сохраняем пропорции */
+        margin-bottom: 20px; /* Отступ снизу */
+    }
+
+    h2 {
+      font-size: 2.5em; /* Увеличиваем размер шрифта для заголовка */
+      font-family: 'Georgia', serif; /* Изменяем шрифт на более красивый */
+      margin-bottom: 20px; /* Отступ снизу */
+    }
+    
+    h3 {
+      font-size: 2em; /* Увеличиваем размер шрифта для подзаголовков */
+      font-family: 'Georgia', serif; /* Изменяем шрифт на более красивый */
+      margin-bottom: 15px; /* Отступ снизу */
+  
+    }
+    
+    p {
+      font-size: 1.2em; /* Увеличиваем размер шрифта для абзацев */
+      margin-bottom: 15px; /* Отступ снизу */
+    }
+    
+    ul {
+      font-size: 1.1em; /* Увеличиваем размер шрифта для списков */
+      padding-left: 20px; /* Добавляем отступ слева для списков */
+    }
+    
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="/static/logo.png" alt="Логотип" class="logo">
+  <h1>Прачечная</h1>
+  <nav>
+    <ul>
+      <li><a href="/services">Услуги</a></li>
+      <li><a href="/schedule">График работы</a></li>
+      <li><a href="/contacts">Контакты</a></li>
+      <li><a id="replace" href="/registration">Регистрация</a></li>
+      <li><a id="replac" href="http://localhost:8080/entry">Вход</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="content">
+  <h2>Добро пожаловать в FRESHNESS!</h2>
+  
+  <p>Мы предоставляем широкий спектр услуг по стирке и сушке одежды. Наша прачечная работает с использованием современного оборудования и экологически чистых моющих средств, что гарантирует высокое качество стирки и заботу об окружающей среде.</p>
+
+  <h3>Почему выбирают нас?</h3>
+  <p>Мы гарантируем высокое качество обслуживания и индивидуальный подход к каждому клиенту. Наша команда профессионалов использует только лучшие моющие средства и оборудование, чтобы ваши вещи всегда были в идеальном состоянии. Наша цель — ваше удовлетворение и доверие.</p>
+
+  <h3>Наша команда:</h3>
+  <p>В нашей команде работают опытные специалисты с многолетним стажем в сфере стирки и химчистки. Каждый из них прошел обучение и знает все тонкости обработки различных тканей. Мы гордимся тем, что можем предложить вам профессиональное и качественное обслуживание.</p>
+  <img src="/static/laundry.png" alt="Добро пожаловать в прачечную" style="display:block; margin:auto;">
+
+  <footer>
+    <p> 2024 FRESHNESS.</p>
+  </footer>
+  <script>
+    console.log("Главная станица")
+    async function success() {
+    const response = await fetch("/checkAuth", {
+                method: "GET",
+                credentials : "include",
+            });
+            if (response.ok) {
+              
+                const data = await response.json();
+                console.log("Пытаюсь поменять регистрацию на ", data)
+                document.getElementById("replace").innerText = data.token;
+            } else {
+              alert("фигня какая-то")
+            }
+          }
+  document.addEventListener('DOMContentLoaded', success());
+  </script>
+  </body>
+  </html>
+  
